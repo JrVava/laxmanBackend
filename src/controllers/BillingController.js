@@ -23,7 +23,7 @@ const createBilling = async (req, res) => {
         ];
 
         const customerResult = await query(
-            'INSERT INTO customers (title, customer_name, location, created_at, updated_at) VALUES (?, ?, ?, ?, ?, ?)',
+            'INSERT INTO customers (title, customer_name, location, created_at, updated_at) VALUES (?, ?, ?, ?, ?)',
             customerValues
         );
         const customerId = customerResult.insertId; // Get the inserted customer ID
