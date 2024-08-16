@@ -351,7 +351,7 @@ const updateBill = async (req, res) => {
 
 
 const searchBill = async (req, res) => {
-    const { customer_name, start_date, end_date } = req.body;
+    const { customer_name,location, start_date, end_date } = req.body;
     
     try {
         // Base query for fetching billing details with associated customer data
@@ -379,8 +379,13 @@ const searchBill = async (req, res) => {
         const queryParams = [];
 
         if (customer_name) {
-            queryStr += ' AND c.customer_name = ?';
-            queryParams.push(customer_name);
+            queryStr += ' AND c.customer_name LIKE ?';
+            queryParams.push(`%${customer_name}%`);
+        }
+
+        if (location) {
+            queryStr += ' AND c.location LIKE ?';
+            queryParams.push(`%${location}%`);
         }
 
         if (start_date) {
